@@ -2,18 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>iPhone 17 시뮬레이터</title>
 <style>
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent;user-select:none}
-html,body{height:100%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#2b2e3b,#0b0c11);font-family:-apple-system,"SF Pro Text","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%;touch-action:manipulation;background:radial-gradient(circle at 50% 30%,#2b2e3b,#0b0c11);font-family:-apple-system,"SF Pro Text","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
 button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
 #stage{position:fixed;inset:0;display:grid;place-items:center}
 #phone{position:relative;width:430px;height:902px;padding:14px;border-radius:72px;background:linear-gradient(145deg,#8d8f96,#3b3d44 45%,#7a7c84);box-shadow:0 30px 80px #000a,inset 0 0 0 2px #ffffff30}
 #side{position:absolute;right:-5px;top:250px;width:5px;height:96px;border-radius:0 3px 3px 0;background:#6b6d75;cursor:pointer}
-#screen{position:relative;width:402px;height:874px;border-radius:58px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #000;color:#fff}
-body.m #phone{width:402px;height:874px;padding:0;border-radius:0;background:none;box-shadow:none}
-body.m #screen{border-radius:0;box-shadow:none}
+#screen{position:relative;width:402px;height:874px;border-radius:58px;clip-path:inset(0 round 58px);overflow:hidden;background:#000;box-shadow:0 0 0 6px #000;color:#fff}
+body.m{background:#000}body.m #stage{display:block}body.m #phone{position:absolute;left:0;top:0;width:402px;padding:0;border-radius:0;background:none;box-shadow:none;transform-origin:0 0}
+body.m #screen{border-radius:0;clip-path:none;box-shadow:none}
 body.m #side,body.m #isl{display:none}
 .layer{position:absolute;inset:0}
 .wp{background-size:cover;background-position:center}
@@ -99,16 +99,9 @@ body.m #side,body.m #isl{display:none}
 .kko .bar{background:#fff}.kko .bar button{background:#fee500;color:#222}.kko .bar input{border-radius:8px}
 
 /* 전화 */
-#phoneapp .v{align-items:center;background:#fff}
-#num{height:92px;margin-top:70px;font-size:40px;font-weight:300;display:flex;align-items:center;letter-spacing:1px}
-#pad{display:grid;grid-template-columns:repeat(3,80px);gap:14px 24px}
-#pad .k{width:80px;height:80px;background:#e9e9eb;color:#000}
-#pad .k:active{background:#c9c9ce}
-#pcrow{display:grid;grid-template-columns:repeat(3,80px);gap:24px;margin-top:16px;align-items:center;justify-items:center}
 .cb{width:80px;height:80px;border-radius:50%;display:grid;place-items:center;font-size:32px;background:#34c759;color:#fff}
 .cb.red{background:#ff3b30}
-#del{font-size:26px;color:#888}
-#call{z-index:40;background:linear-gradient(#3a4252,#161a22);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;padding-top:120px;color:#fff}
+#call{z-index:65;background:linear-gradient(#3a4252,#161a22);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;padding-top:120px;color:#fff}
 #call.on{opacity:1;pointer-events:auto}
 #cn{font-size:36px;font-weight:500;margin-top:14px}
 #cs{font-size:18px;opacity:.7;margin-top:6px}
@@ -149,6 +142,41 @@ body.m #side,body.m #isl{display:none}
 .pvt{font-size:15px;font-weight:600}
 .pv.bare .pvh,.pv.bare .pvf{opacity:0;pointer-events:none}
 .pvf button.on{color:#ff3b30}
+
+#sb .bt{fill:#000}#screen.inapp #sb .bt{fill:#fff}#screen.incall #sb .bt,#screen.inview #sb .bt{fill:#000}
+#sb .r{gap:7px}
+#phoneapp{background:#fff}
+.pkv{position:absolute;inset:0;display:none;flex-direction:column;padding-top:54px}.pkv.on{display:flex}
+#pknum{flex:1;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:16px}
+#pkn{font-size:40px;font-weight:300;height:48px;letter-spacing:1px}
+#pkadd{font-size:15px;color:#2f7df6;height:20px;visibility:hidden}
+.pkg,.pkc{display:grid;grid-template-columns:repeat(3,var(--kb,80px));justify-content:center}
+.pkg{gap:var(--kg,16px) 20px}
+.pkk{width:var(--kb,80px);height:var(--kb,80px);border-radius:50%;background:radial-gradient(circle at 50% 22%,#fff,#f2f2f3);border:1px solid #d3d3d7;box-shadow:0 10px 18px -8px #0003;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:40px;font-weight:300;line-height:1;color:#000;transition:background .12s}
+.pkk:active{background:#dcdce0}
+.pkk small{font-size:11px;font-weight:700;letter-spacing:3px;margin-top:2px;height:11px;line-height:11px}
+.pkc{gap:20px;margin:22px 0 112px;align-items:center;justify-items:center}
+.pkcall{grid-column:2;width:var(--kb,80px);height:var(--kb,80px);border-radius:50%;background:linear-gradient(#74d77c,#5cc765);border:1px solid #8fe096;display:grid;place-items:center;box-shadow:0 8px 16px -6px #34c75988}
+.pkdel{font-size:28px;color:#8e8e93;visibility:hidden}
+.ptabs{position:absolute;z-index:5;left:18px;right:18px;bottom:20px;height:58px;border-radius:30px;background:#fafafaea;border:1px solid #0000001c;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 8px 24px -6px #0003;display:flex;padding:4px}
+.pt{flex:1;border-radius:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:500;color:#000;cursor:pointer}
+.pt svg{width:26px;height:24px}.pt.on{background:#e9e9ec;color:#2f7df6}
+.rch{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 0}
+.rbtn{height:40px;min-width:40px;padding:0 18px;border-radius:20px;background:#fafafa;border:1px solid #d8d8dc;box-shadow:0 6px 14px -6px #0003;display:grid;place-items:center;font-size:16px;color:#000}
+.rseg{display:flex;padding:3px;border-radius:24px;border:1px solid #d8d8dc;box-shadow:0 6px 14px -6px #0003;font-size:16px}
+.rseg span{padding:9px 18px;border-radius:21px;cursor:pointer}.rseg span.on{background:#e9e9ec}
+.rtitle{font-size:34px;font-weight:700;padding:12px 18px 6px;color:#000}
+#rlist{flex:1;overflow:auto;padding-bottom:110px}
+.rr{display:flex;align-items:center;gap:12px;padding-left:18px;height:67px;cursor:pointer;color:#000}
+.rr:active{background:#f0f0f3}
+.rav{width:40px;height:40px;border-radius:50%;background:linear-gradient(#9aa6dc,#6b72b1);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:600;font-style:normal;flex:none}
+.rav.gen{background:linear-gradient(#bcbec8,#9b9da9)}
+.rm{flex:1;min-width:0;height:100%;display:flex;align-items:center;border-bottom:.5px solid #cfcfd4;padding-right:16px}
+.rtx{flex:1;min-width:0}.rtx b{display:block;font-size:17px;font-weight:500}
+.rtx p{font-size:14.5px;color:#8e8e93;display:flex;align-items:center;gap:4px;margin-top:2px}
+.rtm{font-size:15px;color:#8e8e93;margin:0 10px 0 8px;white-space:nowrap}
+.ri{width:36px;height:36px;border-radius:50%;background:#f0f0f3;color:#2f7df6;display:grid;place-items:center;font:italic 600 19px Georgia,serif}
+.rr.miss b{color:#ff3b30}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
 </style>
 </head>
@@ -157,9 +185,9 @@ body.m #side,body.m #isl{display:none}
 <div id="screen">
   <div id="isl"></div>
   <div id="sb"><span id="st">9:41</span><span class="r">
-    <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" width="3" height="12" rx="1"/></svg>
-    <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><path d="M8.5 2.2c2.3 0 4.4.9 6 2.4l1.1-1.1A10.4 10.4 0 0 0 8.5.7C5.8.7 3.3 1.7 1.4 3.5l1.1 1.1a8.8 8.8 0 0 1 6-2.4zm0 3.6c1.4 0 2.6.5 3.6 1.4l1.1-1.1a7.2 7.2 0 0 0-9.4 0l1.1 1.1c1-.9 2.2-1.4 3.6-1.4zm0 3.5l1.9 2-1.9 1-1.9-1z"/></svg>
-    <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="19" height="9" rx="2.2" fill="currentColor"/><path d="M24 4.5v4c1-.3 1.7-1.1 1.7-2s-.7-1.7-1.7-2z" fill="currentColor" opacity=".5"/></svg>
+    <svg width="20" height="13" viewBox="0 0 20 13" fill="currentColor"><rect y="8" width="3.6" height="5" rx="1.8"/><rect x="5.5" y="5.5" width="3.6" height="7.5" rx="1.8"/><rect x="11" y="2.8" width="3.6" height="10.2" rx="1.8"/><rect x="16.4" width="3.6" height="13" rx="1.8"/></svg>
+    <svg width="19" height="14" viewBox="0 0 19 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M2 4.1A11.7 11.7 0 0 1 17 4.1"/><path d="M4.6 7.2A7.6 7.6 0 0 1 14.4 7.2"/><path d="M9.5 12.8L7 10.2A3.8 3.8 0 0 1 12 10.2z" fill="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+    <svg width="31" height="14" viewBox="0 0 31 14"><clipPath id="bc"><rect width="27" height="14" rx="4.6"/></clipPath><rect width="27" height="14" rx="4.6" fill="currentColor" opacity=".3"/><rect clip-path="url(#bc)" width="23.4" height="14" fill="currentColor"/><path d="M28.6 4.8v4.4c1.1-.4 1.8-1.3 1.8-2.2s-.7-1.8-1.8-2.2z" fill="currentColor" opacity=".4"/><text x="11.7" y="11" text-anchor="middle" font-size="10.5" font-weight="700" class="bt" font-family="-apple-system,system-ui,sans-serif">87</text></svg>
   </span></div>
 
   <div id="home" class="layer"><div class="wp"></div><div id="grid"></div><div id="dock"></div></div>
@@ -183,15 +211,17 @@ const $=s=>document.querySelector(s),scr=$('#screen'),ph=$('#phone');
 const PASS='0323';
 let S=1,locked=true,curApp=null,pin='',callT=null,seeded=false;
 
-/* 화면 크기에 맞춰 폰 크기 조절 */
+/* 화면 크기에 맞춰 폰 크기 조절 (모바일은 화면을 가득 채움) */
 function fit(){
-  const w=innerWidth,h=innerHeight,m=w<=500;
+  const vv=window.visualViewport,w=Math.round(vv?vv.width:innerWidth),h=Math.round(vv?vv.height:innerHeight),m=w<=500;
   document.body.classList.toggle('m',m);
-  const W=m?402:430,H=m?874:902;
-  S=m?Math.min(w/W,h/H):Math.min((w-30)/W,(h-30)/H,1.1);
+  let sh=874;
+  if(m){S=w/402;sh=h/S;ph.style.height=sh+'px';scr.style.height=sh+'px'}
+  else{S=Math.min((w-30)/430,(h-30)/902,1.1);ph.style.height='';scr.style.height=''}
   ph.style.transform=`scale(${S})`;
+  scr.style.setProperty('--kb',sh<780?'68px':'80px');scr.style.setProperty('--kg',sh<780?'12px':'16px');
 }
-addEventListener('resize',fit);fit();
+addEventListener('resize',fit);window.visualViewport&&visualViewport.addEventListener('resize',fit);fit();
 
 /* 시계 */
 function tick(){
@@ -237,7 +267,6 @@ function unlock(){
   locked=false;$('#lock').classList.add('gone');setTimeout(hidePC,500);
   if(!seeded){seeded=true;
     setTimeout(()=>kko.receive('민준','오늘 저녁에 치킨 콜? 🍗'),7000);
-    setTimeout(()=>{if(!locked&&!$('#call').classList.contains('on'))callScreen('엄마','휴대전화',true)},60000);
   }
 }
 function lock(){
@@ -324,19 +353,49 @@ const kko=chatApp('kko','kko','채팅',[
  {n:'지아',t:'어제',m:[['them','오늘 고마웠어 😊']],r:['ㅎㅎ 잘 자!','내일 보자~']}]);
 
 /* 전화 앱 */
+let addRecent=()=>{};
 (function(){
   const el=document.createElement('div');el.className='app';el.id='phoneapp';
-  el.innerHTML=`<div class="v"><div id="num"></div><div id="pad"></div><div id="pcrow"><span></span><button class="cb" id="dial">📞</button><button id="del">⌫</button></div></div>`;
+  const HS='<svg width="38" height="38" viewBox="0 0 24 24" fill="#fff"><path d="M20 15.4c-1.2 0-2.4-.2-3.5-.6a1 1 0 0 0-1 .2l-1.6 2c-2.800-1.400-5.500-3.900-6.900-6.800l2-1.700c.3-.3.3-.7.2-1-.4-1.100-.6-2.300-.6-3.500 0-.5-.4-1-1-1H4.200C3.600 3 3 3.200 3 4c0 9.300 7.700 17 17 17 .7 0 1-.6 1-1.200v-3.400c0-.5-.4-1-1-1z"/></svg>';
+  const ICS={
+   f:'<svg viewBox="0 0 28 26" fill="currentColor"><path d="M14 1.500l3.600 7.400 8 1.100-5.800 5.700 1.400 8L14 19.800 6.800 23.700l1.400-8L2.400 10l8-1.100z" stroke="currentColor" stroke-width="1.600" stroke-linejoin="round"/></svg>',
+   r:'<svg viewBox="0 0 28 26" fill="currentColor"><circle cx="14" cy="13" r="12"/><path d="M14 6.500v7h5" fill="none" stroke="#fff" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+   c:'<svg viewBox="0 0 28 26" fill="currentColor"><circle cx="14" cy="13" r="12"/><circle cx="14" cy="10.500" r="4" fill="#fff"/><path d="M6.500 21.500a8 8 0 0 1 15 0z" fill="#fff"/></svg>',
+   k:'<svg viewBox="0 0 28 26" fill="currentColor"><circle cx="5" cy="4" r="2.500"/><circle cx="14" cy="4" r="2.500"/><circle cx="23" cy="4" r="2.500"/><circle cx="5" cy="11" r="2.500"/><circle cx="14" cy="11" r="2.500"/><circle cx="23" cy="11" r="2.500"/><circle cx="5" cy="18" r="2.500"/><circle cx="14" cy="18" r="2.500"/><circle cx="23" cy="18" r="2.500"/><circle cx="14" cy="24" r="2.500"/></svg>',
+   v:'<svg viewBox="0 0 28 26" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round"><circle cx="7.500" cy="12" r="5"/><circle cx="20.500" cy="12" r="5"/><path d="M7.500 17h13"/></svg>'};
+  const T=[['f','즐겨찾기'],['r','최근 통화'],['c','연락처'],['k','키패드'],['v','음성 사서함']];
+  const IN='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2.500 9.500M2.500 5v4.500H7"/></svg>';
+  const OUT='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L9.500 2.500M5 2.500h4.500V7"/></svg>';
+  const GEN='<svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.500" r="4.500"/><path d="M3.500 22a8.500 8.500 0 0 1 17 0z"/></svg>';
+  el.innerHTML=`<div class="pkv on" id="vk"><div id="pknum"><div id="pkn"></div><div id="pkadd">번호 추가</div></div><div class="pkg"></div><div class="pkc"><span></span><button class="pkcall">${HS}</button><button class="pkdel">⌫</button></div></div>
+  <div class="pkv" id="vr"><div class="rch"><button class="rbtn">편집</button><div class="rseg"><span class="on" data-f="all">모두</span><span data-f="miss">부재중 전화</span></div><button class="rbtn" style="padding:0"><svg width="22" height="16" viewBox="0 0 22 16" stroke="#000" stroke-width="2.200" stroke-linecap="round"><path d="M1.500 2h19M4.500 8h13M8 14h6"/></svg></button></div><div class="rtitle">최근 통화</div><div id="rlist"></div></div>
+  <div class="ptabs">${T.map(t=>`<div class="pt${t[0]=='k'?' on':''}" data-t="${t[0]}">${ICS[t[0]]}<span>${t[1]}</span></div>`).join('')}</div>`;
   scr.appendChild(el);apps.phoneapp=el;
-  const pad=el.querySelector('#pad'),num=el.querySelector('#num');let v='';
-  ['1','2','3','4','5','6','7','8','9','*','0','#'].forEach(n=>{
-    const b=document.createElement('button');b.className='k';b.innerHTML=`${n}<small>${subs[n]||''}</small>`;
-    b.onclick=()=>{if(v.length<15){v+=n;num.textContent=v}};pad.appendChild(b);
+  /* 키패드 */
+  let v='',seg='all';
+  const num=el.querySelector('#pkn'),add=el.querySelector('#pkadd'),del=el.querySelector('.pkdel');
+  const show=()=>{num.textContent=v;add.style.visibility=del.style.visibility=v?'visible':'hidden'};
+  [['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['*',''],['0','+'],['#','']].forEach(k=>{
+    const b=document.createElement('button');b.className='pkk';b.innerHTML=`${k[0]}<small>${k[1]}</small>`;
+    b.onclick=()=>{if(v.length<15){v+=k[0];show()}};el.querySelector('.pkg').appendChild(b);
   });
-  el.querySelector('#del').onclick=()=>{v=v.slice(0,-1);num.textContent=v};
-  el.querySelector('#dial').onclick=()=>{if(v)callScreen(v,'휴대전화',false)};
+  del.onclick=()=>{v=v.slice(0,-1);show()};
+  el.querySelector('.pkcall').onclick=()=>{if(v){const n=v;v='';show();callScreen(n,'휴대전화',false)}};
+  /* 최근 통화 (위가 최신) */
+  const R=[['宝贝','오후 6:33','in'],['매니저님','오전 7:33','out'],['매니저님','오전 7:28','miss'],['宝贝','어제','out'],['宝贝','어제','in'],['규빈','어제','in'],
+   ['02-xxxx-0501','화요일','miss'],['매니저님','화요일','in'],['宝贝','화요일','in'],['유진','월요일','out'],['070-xxxx-0420','월요일','miss'],['宝贝','일요일','out']];
+  const list=el.querySelector('#rlist');
+  const rl=()=>{list.innerHTML=(seg=='miss'?R.filter(r=>r[2]=='miss'):R).map(r=>{const g=/^\d/.test(r[0]);
+    return `<div class="rr${r[2]=='miss'?' miss':''}" data-n="${r[0]}"><i class="rav${g?' gen':''}">${g?GEN:r[0][0]}</i><div class="rm"><div class="rtx"><b>${r[0]}</b><p>${r[2]=='out'?OUT:IN} 휴대전화</p></div><span class="rtm">${r[1]}</span><i class="ri">i</i></div></div>`}).join('')};
+  rl();
+  addRecent=(name,type)=>{R.unshift([name,new Date().toLocaleTimeString('ko-KR',{hour:'numeric',minute:'2-digit',hour12:true}),type]);rl()};
+  list.onclick=e=>{const r=e.target.closest('.rr');if(r&&!e.target.closest('.ri'))callScreen(r.dataset.n,'휴대전화',false)};
+  el.querySelector('.rseg').onclick=e=>{const sp=e.target.closest('span');if(!sp)return;seg=sp.dataset.f;el.querySelectorAll('.rseg span').forEach(x=>x.classList.toggle('on',x===sp));rl()};
+  /* 하단 탭: 키패드와 최근 통화만 동작 */
+  el.querySelector('.ptabs').onclick=e=>{const t=e.target.closest('.pt');if(!t||!/^[kr]$/.test(t.dataset.t))return;
+    el.querySelectorAll('.pt').forEach(x=>x.classList.toggle('on',x===t));
+    el.querySelector('#vk').classList.toggle('on',t.dataset.t=='k');el.querySelector('#vr').classList.toggle('on',t.dataset.t=='r')};
 })();
-
 
 /* 사진 앱 */
 const PH=["230605.jpg", "230607.jpg", "230711.jpg", "230923.jpg", "230925.jpg", "230930.jpg", "231002.jpg", "231014-1.jpg", "231014-2.jpg", "231103-1.jpg", "231103-2.jpg", "231204.jpg", "231219.jpg", "231223.jpg", "231224.jpg", "231226-1.jpg", "231226-2.jpg", "240110-1.jpg", "240110-2.jpg", "240202-1.jpg", "240202-2.jpg", "240301.jpg", "240312-1.jpg", "240312-2.jpg", "240312-3.jpg", "240321.jpg", "240405.jpg", "240407.jpg", "240422.jpg", "240509-1.jpg", "240509-2.jpg", "240619-1.jpg", "240619-2.jpg", "240619-3.jpg", "240619-4.jpg", "240619-5.jpg", "240619-6.jpg", "240620.jpg", "240629.jpg", "240630.jpg", "240707-1.jpg", "240707-2.jpg", "240901.jpg", "240902.jpg", "240924.jpg", "241021.jpg", "241030.jpg", "241217.jpg", "241219.jpg", "241221.jpg", "241222-1.jpg", "241222-2.jpg", "241223.jpg", "241224.jpg", "250111-1.jpg", "250111-2.jpg", "250111-3.jpg", "250125.jpg", "250131.jpg", "250205.jpg", "250316.jpg", "250317.jpg", "250404.jpg", "250407.jpg", "250416.jpg", "250426.jpg", "250427-1.jpg", "250427-2.jpg", "250427-3.jpg", "250501.jpg", "250511.jpg", "250515-1.jpg", "250515-2.jpg", "250516.jpg", "250517.jpg", "250520.jpg", "250526.jpg", "250606.jpg", "250610-1.jpg", "250610-2.jpg", "250610-3.jpg", "250618-1.jpg", "250618-2.jpg", "250622.jpg", "250705.jpg", "250708.jpg", "250809.jpg", "250810.jpg", "250919.jpg", "250921-1.jpg", "250921-2.jpg", "250928-1.jpg", "250928-2.jpg", "250928-3.jpg", "251007.jpg", "251009-1.jpg", "251009-2.jpg", "251019.jpg", "251023.jpg", "251027.jpg", "251105.jpg", "251116-1.jpg", "251116-2.jpg", "251116-3.jpg", "251116-4.jpg", "251216.jpg", "260101.jpg", "260104-1.jpg", "260104-2.jpg", "260104-3.jpg", "260123.jpg", "260124.jpg", "260311.jpg", "260505.jpg", "260629.jpg", "260704-1.jpg", "260704-2.jpg", "260713.jpg", "260801.jpg", "260816.jpg", "260822.jpg", "260912.jpg", "260913.jpg", "260919.jpg", "260924.jpg", "261020.jpg"],HALF=63;
@@ -375,13 +434,14 @@ const PURL=i=>(i<HALF?'photos1/':'photos2/')+PH[i];
 
 /* 통화 화면 */
 function callScreen(name,sub,incoming){
-  const c=$('#call');clearInterval(callT);
+  const c=$('#call'),cb=$('#cb');clearInterval(callT);
   $('#cav').textContent=/^[\d*#]/.test(name)?'👤':name[0];$('#cn').textContent=name;
-  const cb=$('#cb');
-  const end=()=>{clearInterval(callT);c.classList.remove('on');scr.classList.remove('incall');if(!curApp)scr.classList.remove('inapp')};
+  let answered=!incoming,ended=false;
+  const end=()=>{if(ended)return;ended=true;clearInterval(callT);c.classList.remove('on');scr.classList.remove('incall');
+    addRecent(name,incoming?(answered?'in':'miss'):'out')};
   const start=()=>{
-    let s=0;$('#cs').textContent='00:00';
-    callT=setInterval(()=>{s++;$('#cs').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+    answered=true;let n=0;$('#cs').textContent='00:00';
+    callT=setInterval(()=>{n++;$('#cs').textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')},1000);
     cb.innerHTML=`<div class="cr">${['🔇|음소거','⌨️|키패드','🔊|스피커'].map(x=>`<div><div class="cs">${x.split('|')[0]}</div><div class="cl">${x.split('|')[1]}</div></div>`).join('')}</div><button class="cb red" style="transform:rotate(135deg)">📞</button>`;
     cb.querySelectorAll('.cs').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
     cb.querySelector('.cb').onclick=end;
@@ -398,6 +458,9 @@ function callScreen(name,sub,incoming){
   scr.classList.add('incall');c.classList.add('on');
   if(incoming)hideNt();
 }
+/* 접속 25초 뒤 宝贝에게서 전화 (잠금화면 위에서도 울림) */
+function ring(){if($('#call').classList.contains('on'))return setTimeout(ring,4000);callScreen('宝贝','휴대전화',true)}
+setTimeout(ring,25000);
 </script>
 </body>
 </html>
