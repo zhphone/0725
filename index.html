@@ -52,9 +52,9 @@ body.m #side,body.m #isl{display:none}
 
 /* 홈 */
 #home{z-index:10}
-#home .wp{position:absolute;inset:0;background-image:url(home.jpg)}
+#home .wp{position:absolute;inset:0;background-image:url(home-new.jpg)}
 #grid{position:absolute;top:78px;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px 0;padding:0 17px}
-.ic{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;text-shadow:0 1px 4px #0009;cursor:pointer}
+.ic{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;text-shadow:0 1px 5px #000b,0 0 2px #0007;cursor:pointer}
 .ic i{position:relative;display:block;width:60px;height:60px;transition:transform .1s}
 .ic i img{width:60px;height:60px;display:block;pointer-events:none}
 .ic:active i{transform:scale(.9)}
@@ -126,6 +126,29 @@ body.m #side,body.m #isl{display:none}
 #nt b{font-size:15px}#nt p{font-size:14px;color:#333;margin-top:1px}
 #toast{position:absolute;z-index:85;bottom:130px;left:50%;transform:translateX(-50%) translateY(20px);padding:10px 18px;border-radius:20px;background:#000b;font-size:14px;opacity:0;transition:.3s;white-space:nowrap;pointer-events:none}
 #toast.on{opacity:1;transform:translateX(-50%)}
+
+#screen.inview #sb{color:#fff}#screen.inview #hi::after{background:#fff}
+.pg{padding-top:0}
+.pgh{padding:58px 20px 8px;display:flex;align-items:baseline;justify-content:space-between;background:#fff}
+.pgh b{font-size:34px;font-weight:700}.pgh small{font-size:14px;color:#8e8e93}
+.pgrid{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;align-content:start;padding-bottom:120px}
+.pi{aspect-ratio:1;background-image:url(thumbs.jpg);background-color:#e5e5ea;cursor:pointer}
+.pi:active{opacity:.7}
+.pseg{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);display:flex;padding:4px;border-radius:24px;background:#f2f2f7e6;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 2px 14px #0003;font-size:14px;color:#555}
+.pseg span,.pseg b{padding:8px 15px;border-radius:20px;font-weight:500;white-space:nowrap}
+.pseg b{background:#fff;color:#000;box-shadow:0 1px 4px #0002}
+.pv{position:absolute;inset:0;background:#000;color:#fff;opacity:0;pointer-events:none;transition:opacity .25s}
+.app.t .pv{opacity:1;pointer-events:auto}
+.pvs{position:absolute;inset:0;overflow:hidden;touch-action:pan-y;cursor:grab}
+.pvtr{display:flex;height:100%;will-change:transform}
+.sl{width:402px;height:100%;flex:none;display:grid;place-items:center}
+.sl img{max-width:100%;max-height:100%;object-fit:contain;pointer-events:none}
+.pvh,.pvf{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;transition:opacity .2s;background:#000a;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.pvh{top:0;padding:54px 14px 10px}.pvf{bottom:0;padding:10px 30px 36px;font-size:24px}
+.pvh button{font-size:17px;color:#0a84ff;width:90px;text-align:left}.pvh i{width:90px}
+.pvt{font-size:15px;font-weight:600}
+.pv.bare .pvh,.pv.bare .pvf{opacity:0;pointer-events:none}
+.pvf button.on{color:#ff3b30}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
 </style>
 </head>
@@ -238,13 +261,13 @@ function openApp(id,iconEl){
   if(!apps[id]){toast('아직 준비 중인 앱이에요');return}
   const el=apps[id],sr=scr.getBoundingClientRect(),r=iconEl.getBoundingClientRect();
   el.style.transformOrigin=`${(r.left+r.width/2-sr.left)/S}px ${(r.top+r.height/2-sr.top)/S}px`;
-  if(curApp&&curApp!==el)curApp.classList.remove('open');
-  curApp=el;el.classList.add('open');scr.classList.add('inapp');
+  if(curApp&&curApp!==el){curApp.classList.remove('open');scr.classList.remove('inview')}
+  curApp=el;el.classList.add('open');scr.classList.add('inapp');el.onopen&&el.onopen();
   const b=$(`.ic[data-id=${id}] .bd`);if(b)b.remove();
 }
 function goHome(){
   if(curApp){curApp.classList.remove('open','t');curApp=null}
-  scr.classList.remove('inapp');
+  scr.classList.remove('inapp','inview');
 }
 $('#hi').onclick=()=>{if(locked)return;if(curApp)goHome()};
 
@@ -312,6 +335,42 @@ const kko=chatApp('kko','kko','채팅',[
   });
   el.querySelector('#del').onclick=()=>{v=v.slice(0,-1);num.textContent=v};
   el.querySelector('#dial').onclick=()=>{if(v)callScreen(v,'휴대전화',false)};
+})();
+
+
+/* 사진 앱 */
+const PH=["230605.jpg", "230607.jpg", "230711.jpg", "230923.jpg", "230925.jpg", "230930.jpg", "231002.jpg", "231014-1.jpg", "231014-2.jpg", "231103-1.jpg", "231103-2.jpg", "231204.jpg", "231219.jpg", "231223.jpg", "231224.jpg", "231226-1.jpg", "231226-2.jpg", "240110-1.jpg", "240110-2.jpg", "240202-1.jpg", "240202-2.jpg", "240301.jpg", "240312-1.jpg", "240312-2.jpg", "240312-3.jpg", "240321.jpg", "240405.jpg", "240407.jpg", "240422.jpg", "240509-1.jpg", "240509-2.jpg", "240619-1.jpg", "240619-2.jpg", "240619-3.jpg", "240619-4.jpg", "240619-5.jpg", "240619-6.jpg", "240620.jpg", "240629.jpg", "240630.jpg", "240707-1.jpg", "240707-2.jpg", "240901.jpg", "240902.jpg", "240924.jpg", "241021.jpg", "241030.jpg", "241217.jpg", "241219.jpg", "241221.jpg", "241222-1.jpg", "241222-2.jpg", "241223.jpg", "241224.jpg", "250111-1.jpg", "250111-2.jpg", "250111-3.jpg", "250125.jpg", "250131.jpg", "250205.jpg", "250316.jpg", "250317.jpg", "250404.jpg", "250407.jpg", "250416.jpg", "250426.jpg", "250427-1.jpg", "250427-2.jpg", "250427-3.jpg", "250501.jpg", "250511.jpg", "250515-1.jpg", "250515-2.jpg", "250516.jpg", "250517.jpg", "250520.jpg", "250526.jpg", "250606.jpg", "250610-1.jpg", "250610-2.jpg", "250610-3.jpg", "250618-1.jpg", "250618-2.jpg", "250622.jpg", "250705.jpg", "250708.jpg", "250809.jpg", "250810.jpg", "250919.jpg", "250921-1.jpg", "250921-2.jpg", "250928-1.jpg", "250928-2.jpg", "250928-3.jpg", "251007.jpg", "251009-1.jpg", "251009-2.jpg", "251019.jpg", "251023.jpg", "251027.jpg", "251105.jpg", "251116-1.jpg", "251116-2.jpg", "251116-3.jpg", "251116-4.jpg", "251216.jpg", "260101.jpg", "260104-1.jpg", "260104-2.jpg", "260104-3.jpg", "260123.jpg", "260124.jpg", "260311.jpg", "260505.jpg", "260629.jpg", "260704-1.jpg", "260704-2.jpg", "260713.jpg", "260801.jpg", "260816.jpg", "260822.jpg", "260912.jpg", "260913.jpg", "260919.jpg", "260924.jpg", "261020.jpg"],HALF=63;
+const PURL=i=>(i<HALF?'photos1/':'photos2/')+PH[i];
+(function(){
+  const COLS=12,ROWS=Math.ceil(PH.length/COLS),N=PH.length;
+  const el=document.createElement('div');el.className='app';el.id='photosapp';
+  el.innerHTML=`<div class="v pg"><div class="pgh"><b>보관함</b><small>사진 ${N}장</small></div><div class="pgrid"></div><div class="pseg"><span>연</span><span>월</span><span>일</span><b>모든 사진</b></div></div>
+  <div class="pv"><div class="pvs"><div class="pvtr"></div></div><div class="pvh"><button class="pvb">‹ 보관함</button><div class="pvt"></div><i></i></div><div class="pvf"><button>⬆️</button><button class="hrt">♡</button><button>ⓘ</button><button>🗑️</button></div></div>`;
+  scr.appendChild(el);apps.photos=el;
+  const grid=el.querySelector('.pgrid'),track=el.querySelector('.pvtr'),pv=el.querySelector('.pv'),vs=el.querySelector('.pvs');
+  grid.innerHTML=PH.map((n,i)=>`<div class="pi" data-i="${i}" style="background-size:${COLS*100}% ${ROWS*100}%;background-position:${(i%COLS)/(COLS-1)*100}% ${Math.floor(i/COLS)/(ROWS-1)*100}%"></div>`).join('');
+  track.innerHTML=PH.map(()=>'<div class="sl"><img alt="" draggable="false"></div>').join('');
+  const sl=[...track.children],fav=new Set();let idx=0,first=true;
+  const lab=n=>`${2000+ +n.slice(0,2)}년 ${+n.slice(2,4)}월 ${+n.slice(4,6)}일`;
+  function go(i,anim){
+    idx=Math.max(0,Math.min(N-1,i));
+    track.style.transition=anim?'transform .3s cubic-bezier(.3,.8,.3,1)':'none';
+    track.style.transform=`translateX(${-idx*402}px)`;
+    [idx-1,idx,idx+1].forEach(j=>{const im=sl[j]&&sl[j].firstChild;if(im&&!im.getAttribute('src'))im.src=PURL(j)});
+    el.querySelector('.pvt').textContent=lab(PH[idx]);
+    el.querySelector('.hrt').textContent=fav.has(idx)?'♥':'♡';el.querySelector('.hrt').classList.toggle('on',fav.has(idx));
+  }
+  grid.onclick=e=>{const t=e.target.closest('.pi');if(!t)return;pv.classList.remove('bare');go(+t.dataset.i,false);el.classList.add('t');scr.classList.add('inview')};
+  el.querySelector('.pvb').onclick=()=>{el.classList.remove('t');scr.classList.remove('inview')};
+  el.querySelector('.hrt').onclick=()=>{fav.has(idx)?fav.delete(idx):fav.add(idx);go(idx,false)};
+  let d=null,dx=0;
+  vs.onpointerdown=e=>{d=e.clientX;dx=0;vs.setPointerCapture(e.pointerId)};
+  vs.onpointermove=e=>{if(d===null)return;dx=(e.clientX-d)/S;track.style.transition='none';track.style.transform=`translateX(${-idx*402+dx}px)`};
+  vs.onpointerup=vs.onpointercancel=()=>{if(d===null)return;d=null;
+    if(Math.abs(dx)<5)pv.classList.toggle('bare');
+    go(Math.abs(dx)>50?idx+(dx<0?1:-1):idx,true);dx=0};
+  addEventListener('keydown',e=>{if(curApp===el&&el.classList.contains('t')){if(e.key==='ArrowRight')go(idx+1,true);if(e.key==='ArrowLeft')go(idx-1,true);if(e.key==='Escape')el.querySelector('.pvb').click()}});
+  el.onopen=()=>{if(first){first=false;grid.scrollTop=grid.scrollHeight}};
 })();
 
 /* 통화 화면 */
