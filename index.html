@@ -594,6 +594,20 @@ button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
 #notesapp .notes-editor.show #notesChecklist svg circle:first-child {fill:#151518;stroke:none}
 #notesapp .notes-editor.show #notesChecklist svg path:first-of-type {stroke:#fff;stroke-width:2;fill:none}
 #notesapp .notes-editor.show #notesDone svg path:nth-child(2) {fill:#fff}
+
+/* Safari isolated on-screen keyboard; native OS keyboard never receives focus. */
+.saf-home-value{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px;color:#202124}
+.saf-display{display:flex;align-items:center;white-space:nowrap;overflow:hidden;cursor:text;min-height:40px}
+.saf-placeholder{color:#80868b}
+.saf-display.editing:after{content:"";height:23px;width:1.5px;background:#4285f4;flex:none;animation:kbl 1s steps(1) infinite}
+.safariapp .safari-kbd{z-index:22;bottom:0;transform:translateY(105%);transition:transform .24s ease;}
+.safariapp.saf-typing .safari-kbd{transform:translateY(0)}
+.safariapp.saf-typing .saf-history{bottom:292px}
+.safariapp.saf-typing .saf-toolbar{display:none}
+.safariapp .safari-kbd .kbt{justify-content:space-between;padding:0 17px;gap:8px}
+.safariapp .safari-kbd .kbt button{font-size:17px;color:#34343a;padding:5px 7px}
+.safariapp .safari-kbd .kbt .saf-kbd-confirm{color:#1673d1;font-weight:600}
+.safariapp .saf-history-items{overscroll-behavior:contain}
 </style>
 </head>
 <body>
@@ -1229,21 +1243,21 @@ setTimeout(()=>{
 /* Safari - Google 시작 화면 */
 (function(){
  const a=document.createElement('div');a.className='app safariapp';a.id='safari';
- a.innerHTML=`<div class="saf-page"><div class="saf-top"><div class="saf-tabs"><span class="saf-tab active">전체</span><span class="saf-tab">이미지</span></div><div class="saf-icons"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10"/><path d="M8 8a4 4 0 0 1 8 0v5.5l1.7 1.8a.6.6 0 0 1-.4 1H6.7a.6.6 0 0 1-.4-1L8 13.5V8"/><path d="M10 19a2 2 0 0 0 4 0"/></svg><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.2"/><circle cx="12" cy="5" r="1.2"/><circle cx="19" cy="5" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/><circle cx="5" cy="19" r="1.2"/><circle cx="12" cy="19" r="1.2"/><circle cx="19" cy="19" r="1.2"/></svg><span class="saf-avatar"></span></div></div><div class="saf-brand"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div><div class="saf-search"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16.2 16.2L21 21"/></svg><input placeholder="" aria-label="Google 검색"><div class="saf-righticons"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="4.6"/><path d="M13.3 15.3L18 20"/><path d="M17.3 5.8l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z" fill="currentColor" stroke="none"/></svg><svg width="22" height="32" viewBox="0 0 20 28" fill="currentColor"><rect x="6" y="2" width="8" height="14" rx="4"/><path d="M3.5 13.5v1.1a6.5 6.5 0 0 0 13 0v-1.1h-2v1.1a4.5 4.5 0 0 1-9 0v-1.1z"/><path d="M9 20.5h2v4h-2z"/><path d="M6 24h8v2H6z"/></svg><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.5h1.2a1.8 1.8 0 0 1 1.8 1.8v8.4a1.8 1.8 0 0 1-1.8 1.8H7.3a1.8 1.8 0 0 1-1.8-1.8V9.3a1.8 1.8 0 0 1 1.8-1.8h1.2"/><path d="M9 7.5V6.8A2.8 2.8 0 0 1 11.8 4h.4A2.8 2.8 0 0 1 15 6.8v.7"/><circle cx="12" cy="13.5" r="3.1"/><circle cx="18.2" cy="17.8" r="1.2" fill="currentColor" stroke="none"/></svg></div></div><div class="saf-bottomsite"><div>대한민국</div><div class="saf-footlinks">어두운 테마: 사용 중지됨　 설정　 개인정보처리방침　 약관</div><div>광고　 비즈니스　 Google 정보</div></div></div><div class="saf-toolbar"><button class="saf-back" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></button><div class="saf-url"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="saf-url-text">google.com</span><svg viewBox="0 0 24 24"><path d="M20 4v6h-6"/><path d="M19 10a8 8 0 1 0 .9 5.4"/></svg></div><button class="saf-tabsbtn" aria-label="탭"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="15" height="15" rx="2"/><rect x="7" y="7" width="15" height="15" rx="2"/></svg></button></div>`;
+ a.innerHTML=`<div class="saf-page"><div class="saf-top"><div class="saf-tabs"><span class="saf-tab active">전체</span><span class="saf-tab">이미지</span></div><div class="saf-icons"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10"/><path d="M8 8a4 4 0 0 1 8 0v5.5l1.7 1.8a.6.6 0 0 1-.4 1H6.7a.6.6 0 0 1-.4-1L8 13.5V8"/><path d="M10 19a2 2 0 0 0 4 0"/></svg><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.2"/><circle cx="12" cy="5" r="1.2"/><circle cx="19" cy="5" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/><circle cx="5" cy="19" r="1.2"/><circle cx="12" cy="19" r="1.2"/><circle cx="19" cy="19" r="1.2"/></svg><span class="saf-avatar"></span></div></div><div class="saf-brand"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div><div class="saf-search"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16.2 16.2L21 21"/></svg><span class="saf-home-value"></span><div class="saf-righticons"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="4.6"/><path d="M13.3 15.3L18 20"/><path d="M17.3 5.8l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z" fill="currentColor" stroke="none"/></svg><svg width="22" height="32" viewBox="0 0 20 28" fill="currentColor"><rect x="6" y="2" width="8" height="14" rx="4"/><path d="M3.5 13.5v1.1a6.5 6.5 0 0 0 13 0v-1.1h-2v1.1a4.5 4.5 0 0 1-9 0v-1.1z"/><path d="M9 20.5h2v4h-2z"/><path d="M6 24h8v2H6z"/></svg><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.5h1.2a1.8 1.8 0 0 1 1.8 1.8v8.4a1.8 1.8 0 0 1-1.8 1.8H7.3a1.8 1.8 0 0 1-1.8-1.8V9.3a1.8 1.8 0 0 1 1.8-1.8h1.2"/><path d="M9 7.5V6.8A2.8 2.8 0 0 1 11.8 4h.4A2.8 2.8 0 0 1 15 6.8v.7"/><circle cx="12" cy="13.5" r="3.1"/><circle cx="18.2" cy="17.8" r="1.2" fill="currentColor" stroke="none"/></svg></div></div><div class="saf-bottomsite"><div>대한민국</div><div class="saf-footlinks">어두운 테마: 사용 중지됨　 설정　 개인정보처리방침　 약관</div><div>광고　 비즈니스　 Google 정보</div></div></div><div class="saf-toolbar"><button class="saf-back" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></button><div class="saf-url"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="saf-url-text">google.com</span><svg viewBox="0 0 24 24"><path d="M20 4v6h-6"/><path d="M19 10a8 8 0 1 0 .9 5.4"/></svg></div><button class="saf-tabsbtn" aria-label="탭"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="15" height="15" rx="2"/><rect x="7" y="7" width="15" height="15" rx="2"/></svg></button></div>`;
 
  const searchHistory=['对嗓子好的茶','嫁金钗 Netflix','서울 주문제작 케이크','서울 케이크','首尔定制蛋糕','성한빈 쇼케이스','성한빈','서울 날씨'];
  const clockSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></svg>';
  const micSvg='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="9" y="3" width="6" height="13" rx="3"/><path d="M6 13v1a6 6 0 0 0 12 0v-1h-2v1a4 4 0 0 1-8 0v-1zM11 19h2v3h-2z"/></svg>';
  const cameraSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 6.5h2l1.2-2h3.6l1.2 2h2.5a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/><circle cx="12" cy="13" r="3"/><circle cx="18" cy="17.8" r="1" fill="currentColor" stroke="none"/></svg>';
  const history=document.createElement('div');history.className='saf-history';
- history.innerHTML='<div class="saf-history-head"><span class="saf-history-plus">+</span><input class="saf-history-input" placeholder="Google에 물어보세요" aria-label="검색어 입력">'+micSvg+cameraSvg+'</div><div class="saf-history-items"></div>';
+ history.innerHTML='<div class="saf-history-head"><span class="saf-history-plus">+</span><div class="saf-history-input saf-display" role="textbox" aria-label="검색어 입력"><span class="saf-placeholder">Google에 물어보세요</span></div>'+micSvg+cameraSvg+'</div><div class="saf-history-items"></div>';
  a.appendChild(history);
  const hInput=history.querySelector('.saf-history-input');
  const hItems=history.querySelector('.saf-history-items');
- const showHistory=()=>{history.classList.add('on');hInput.value='';renderHistory();hInput.focus();};
- const closeHistory=()=>{history.classList.remove('on');hInput.blur();};
+ const showHistory=()=>{history.classList.add('on');safSetText('');safOpenKb();};
+ const closeHistory=()=>{safCloseKb();history.classList.remove('on');};
  function renderHistory(){
-   const q=hInput.value.trim().toLowerCase();
+   const q=safCurrentText().trim().toLowerCase();
    hItems.innerHTML='';
    searchHistory.filter(item=>item.toLowerCase().includes(q)).forEach(term=>{
       const row=document.createElement('div');row.className='saf-history-row';
@@ -1251,19 +1265,65 @@ setTimeout(()=>{
       const label=document.createElement('span');label.className='saf-htext';label.textContent=term;row.appendChild(label);
       const del=document.createElement('button');del.textContent='×';del.setAttribute('aria-label',term+' 검색기록 삭제');
       del.onclick=e=>{e.stopPropagation();const i=searchHistory.indexOf(term);if(i>=0)searchHistory.splice(i,1);renderHistory();};
-      row.onclick=()=>{hInput.value=term;closeHistory();a.querySelector('.saf-search input').value=term;a.querySelector('.saf-url-text').textContent='google.com/search';};
+      row.onclick=()=>{safSetText(term);safSubmit();};
       row.appendChild(del);hItems.appendChild(row);
    });
  }
- hInput.addEventListener('input',renderHistory);
- hInput.addEventListener('keydown',e=>{if(e.key==='Escape')closeHistory();if(e.key==='Enter'){const q=hInput.value.trim();if(q){const i=searchHistory.indexOf(q);if(i>=0)searchHistory.splice(i,1);searchHistory.unshift(q);a.querySelector('.saf-search input').value=q;a.querySelector('.saf-url-text').textContent='google.com/search';}closeHistory();}});
- 
+ // Safari uses a fully simulated keyboard, never focusing an HTML input.
  a.querySelector('.saf-search').onclick=showHistory;
  scr.appendChild(a);apps.safari=a;
- const input=a.querySelector('input');
- input.onkeydown=e=>{if(e.key==='Enter'){input.blur();a.querySelector('.saf-url-text').textContent='google.com/search';}};
- a.querySelector('.saf-back').onclick=()=>{input.value='';a.querySelector('.saf-url-text').textContent='google.com';};
+ a.querySelector('.saf-back').onclick=()=>{if(history.classList.contains('on'))closeHistory();else{a.querySelector('.saf-home-value').textContent='';a.querySelector('.saf-url-text').textContent='google.com';}};
  a.querySelector('.saf-tabs').onclick=()=>{};
+
+ // The same two-beolsik input algorithm/layout as the KakaoTalk in-app keyboard.
+ const safKb=document.createElement('div');safKb.className='kbd safari-kbd';a.appendChild(safKb);
+ let safBuf='',safCho=null,safJung=null,safJong=null,safLang='ko',safMode='abc',safShift=false;
+ const SCH='ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ', SJU='ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+ const SJO=['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+ const SVC={'ㅗㅏ':'ㅘ','ㅗㅐ':'ㅙ','ㅗㅣ':'ㅚ','ㅜㅓ':'ㅝ','ㅜㅔ':'ㅞ','ㅜㅣ':'ㅟ','ㅡㅣ':'ㅢ'};
+ const SFC={'ㄱㅅ':'ㄳ','ㄴㅈ':'ㄵ','ㄴㅎ':'ㄶ','ㄹㄱ':'ㄺ','ㄹㅁ':'ㄻ','ㄹㅂ':'ㄼ','ㄹㅅ':'ㄽ','ㄹㅌ':'ㄾ','ㄹㅍ':'ㄿ','ㄹㅎ':'ㅀ','ㅂㅅ':'ㅄ'};
+ const sPair=(m,v)=>Object.keys(m).find(k=>m[k]===v);
+ const sComp=()=>safCho&&safJung?String.fromCharCode(0xac00+(SCH.indexOf(safCho)*21+SJU.indexOf(safJung))*28+SJO.indexOf(safJong||'')):(safCho||safJung||'');
+ const sCommit=()=>{safBuf+=sComp();safCho=safJung=safJong=null};
+ function sHangul(j){
+  if(SJU.includes(j)){
+   if(safCho&&safJung&&safJong){const p=sPair(SFC,safJong);if(p){safJong=p[0];sCommit();safCho=p[1];safJung=j}else{let m=safJong;safJong=null;sCommit();safCho=m;safJung=j}}
+   else if(safJung){let c=SVC[safJung+j];if(c)safJung=c;else{sCommit();safJung=j}}
+   else safJung=j;
+  }else if(safCho&&safJung){if(!safJong){if(SJO.includes(j))safJong=j;else{sCommit();safCho=j}}else{let c=SFC[safJong+j];if(c)safJong=c;else{sCommit();safCho=j}}}else{sCommit();safCho=j}
+ }
+ const safCurrentText=()=>safBuf+sComp();
+ function safSetText(v){safBuf=v;safCho=safJung=safJong=null;safUpdate()}
+ function safUpdate(){let t=safCurrentText();hInput.textContent='';if(!t){let ph=document.createElement('span');ph.className='saf-placeholder';ph.textContent='Google에 물어보세요';hInput.appendChild(ph)}else hInput.textContent=t;
+  if(history.classList.contains('on')){hInput.classList.add('editing');renderHistory()}}
+ function safSubmit(){sCommit();const q=safBuf.trim();if(q){let i=searchHistory.indexOf(q);if(i>=0)searchHistory.splice(i,1);searchHistory.unshift(q);a.querySelector('.saf-home-value').textContent=q;a.querySelector('.saf-url-text').textContent='google.com/search'}closeHistory()}
+ function safBackspace(){if(safJong){let p=sPair(SFC,safJong);safJong=p?p[0]:null}else if(safJung){let p=sPair(SVC,safJung);safJung=p?p[0]:null}else if(safCho)safCho=null;else safBuf=[...safBuf].slice(0,-1).join('')}
+ const SKO=[['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ'],['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ'],['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ']];
+ const SKOS={'ㅂ':'ㅃ','ㅈ':'ㅉ','ㄷ':'ㄸ','ㄱ':'ㄲ','ㅅ':'ㅆ','ㅐ':'ㅒ','ㅔ':'ㅖ'};
+ const SEN=['qwertyuiop','asdfghjkl','zxcvbnm'].map(x=>[...x]);
+ const SNUM=[[...'1234567890'],['-','/',':',';','(',')','₩','&','@','"'],['.',',','?','!',"'"]];
+ const SKI={sh:'<svg viewBox="0 0 24 24"><path d="M12 4.5 4 13h4.5v5.5h7V13H20z"/></svg>',bs:'<svg viewBox="0 0 24 24"><path d="M9 5h11a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 20 19H9L2.5 12z"/><path d="m12.5 9.5 5 5m0-5-5 5"/></svg>',ent:'<svg viewBox="0 0 24 24"><path d="M20 6v6a2 2 0 0 1-2 2H5m0 0 4-4m-4 4 4 4"/></svg>',lang:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-3 15 0 18M12 3c3 3 3 15 0 18M5 7h14M5 17h14"/></svg>'};
+ function safRenderKb(){const b=(act,c,label,cl='')=>'<button class="kkey '+cl+'" data-a="'+act+'" data-k="'+c+'">'+label+'</button>';
+  const labels=arr=>arr.map(x=>b('ch',x,x)).join('');const L=(safLang==='ko'?SKO:SEN).map(r=>r.map(x=>safLang==='ko'?(safShift&&SKOS[x]?SKOS[x]:x):(safShift?x.toUpperCase():x)));
+  let h;if(safMode==='num'){h='<div class="kkr">'+labels(SNUM[0])+'</div><div class="kkr">'+labels(SNUM[1])+'</div><div class="kkr s3"><span class="kkey w" style="visibility:hidden"></span><div class="kkr">'+labels(SNUM[2])+'</div>'+b('bs','',SKI.bs,'w')+'</div>'}
+  else h='<div class="kkr">'+labels(L[0])+'</div><div class="kkr">'+labels(L[1])+'</div><div class="kkr s3">'+b('shift','',SKI.sh,'w'+(safShift?' on':''))+'<div class="kkr">'+labels(L[2])+'</div>'+b('bs','',SKI.bs,'w')+'</div>';
+  h+='<div class="kkr">'+b(safMode==='num'?'abc':'num','',safMode==='num'?(safLang==='ko'?'가나다':'ABC'):'123','sm bw')+b('lang','',SKI.lang,'bw')+'<button class="kkey spc" data-a="sp"><small>'+(safLang==='ko'?'한':'EN')+'</small></button>'+b('ent','',SKI.ent,'ent')+'</div>';
+  safKb.innerHTML='<div class="kbt"><button class="saf-kbd-hide" aria-label="키보드 닫기">⌄</button><span>Google 검색</span><button class="saf-kbd-confirm">완료</button></div><div class="kbp">'+h+'</div>';
+  safKb.querySelector('.saf-kbd-hide').onclick=safCloseKb;safKb.querySelector('.saf-kbd-confirm').onclick=safSubmit;
+ }
+ function safAct(act,key){if(act==='ch'){if(safLang==='ko'&&safMode==='abc'&&/[ㄱ-ㅣ]/.test(key))sHangul(key);else{sCommit();safBuf+=key}if(safShift){safShift=false;safRenderKb()}}
+  else if(act==='bs')safBackspace();else if(act==='sp'){sCommit();safBuf+=' '}else if(act==='ent'){safSubmit();return}
+  else if(act==='shift'){safShift=!safShift;safRenderKb();return}else if(act==='num'){sCommit();safMode='num';safRenderKb();return}else if(act==='abc'){sCommit();safMode='abc';safRenderKb();return}else if(act==='lang'){sCommit();safLang=safLang==='ko'?'en':'ko';safMode='abc';safShift=false;safRenderKb();return}
+  safUpdate();}
+ function safOpenKb(){safRenderKb();a.classList.add('saf-typing');safUpdate()}
+ function safCloseKb(){sCommit();a.classList.remove('saf-typing');hInput.classList.remove('editing');safUpdate()}
+ safKb.addEventListener('pointerdown',e=>{const b=e.target.closest('.kkey');if(!b)return;e.preventDefault();safAct(b.dataset.a,b.dataset.k)});
+ hInput.addEventListener('pointerdown',e=>{e.preventDefault();safOpenKb()});
+ const SKEY={q:'ㅂ',w:'ㅈ',e:'ㄷ',r:'ㄱ',t:'ㅅ',y:'ㅛ',u:'ㅕ',i:'ㅑ',o:'ㅐ',p:'ㅔ',a:'ㅁ',s:'ㄴ',d:'ㅇ',f:'ㄹ',g:'ㅎ',h:'ㅗ',j:'ㅓ',k:'ㅏ',l:'ㅣ',z:'ㅋ',x:'ㅌ',c:'ㅊ',v:'ㅍ',b:'ㅠ',n:'ㅜ',m:'ㅡ'};
+ addEventListener('keydown',e=>{if(!(curApp===a&&a.classList.contains('saf-typing')))return;if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key==='Escape'){e.preventDefault();safCloseKb();return}if(e.key==='Enter'){e.preventDefault();safSubmit();return}if(e.key==='Backspace'){e.preventDefault();safAct('bs');return}if(e.key.length!==1)return;
+  e.preventDefault();let c=e.key;if(safLang==='ko'&&SKEY[c.toLowerCase()]){c=SKEY[c.toLowerCase()];if(e.key!==e.key.toLowerCase()&&SKOS[c])c=SKOS[c]}safAct('ch',c)});
+
 })();
 
 /* Notes data and UI, preserving all existing apps */
